@@ -1,0 +1,180 @@
+<!-- go away doctype you stink-->
+<html>
+<head>
+    <title>Gaymeter3000</title>  
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+  <h1 id="gtitle"><span style="color:#FF0000">G</span><span style="color:#FF2C00">a</span><span style="color:#FF5700">y</span><span style="color:#FF8300">M</span><span style="color:#FFAF00">e</span><span style="color:#FFDB00">t</span><span style="color:#F8FF00">e</span><span style="color:#CCFF00">r</span><span style="color:#A0FF00">3</span><span style="color:#75FF00">0</span><span style="color:#49FF00">0</span><span style="color:#1DFF00">0</span><span style="color:#00FF0F">:</span> <span style="color:#00FF3A">v</span><span style="color:#00FF66">e</span><span style="color:#00FF92">r</span><span style="color:#00FFBD">y</span> <span style="color:#00FFE9">p</span><span style="color:#00E9FF">e</span><span style="color:#00BDFF">a</span><span style="color:#0092FF">k</span> <span style="color:#0066FF">g</span><span style="color:#003AFF">a</span><span style="color:#000FFF">y</span><span style="color:#1D00FF">m</span><span style="color:#4900FF">e</span><span style="color:#7500FF">t</span><span style="color:#A000FF">e</span><span style="color:#CC00FF">r</span> <span style="color:#F800FF">t</span><span style="color:#FF00DB">r</span><span style="color:#FF00AF">u</span><span style="color:#FF0083">s</span><span style="color:#FF0057">t</span><span style="color:#FF002C">t</span></h1>
+  <div id="container">
+    <button id="tabbtn"></button>
+    <div id="tabdiv">
+      <div id="tabdivtitle"><h3 class="divtxt">Menu</h3>
+        <button class="tabdivbtn" id="infobtn">Info</button>
+        <button class="tabdivbtn" id="contbtn">Contributors!</button>
+        <button class="tabdivbtn" id="settingsbtn">Settings</button>
+      </div>
+      <div class="btndivtitle" id="contdiv">  
+        <button class="tabdivbtn" id="contbackbtn">Back</button>
+        <h4 class="divtxt">Contributors</h4>
+        <p><h5 class="divtxt">Boiimaster: description suggestioner + kind of a tester</h5></p>
+        <p><h5 class="divtxt">RedCteron: suggestioning descriptions for gayness levels</h5></p>
+      </div>
+      <div class="btndivtitle" id="infodiv">
+        <button class="tabdivbtn" id="infobackbtn">Back</button>
+        <h4 class="divtxt">Info</h4>
+        <p><h5 class="divtxt">gaymeter3000 is created purely for fun and isnt meant to offend people or be truly accurate , it measures the gayness by using a database and a function to check the similarity of words in the username to the words in the database, so dont take this meter seriosly</h5></p>
+    </div>
+    <div class="btndivtitle" id="settingsdiv">
+        <button class="tabdivbtn" id="settingsbackbtn">Back</button>
+        <h4 class="divtxt">Settings</h4>
+        <button id="togbtn">Toggle dark theme</button>
+        <button id="skebobbtn"><audio src="skebob-mem.mp3" id="skebobaudio"></audio></button>
+    </div>>
+  </div>
+  <div id="gaydiv">
+    <form>
+      <input type="text" id="usernameInput" placeholder="enter ur username">
+      <br>
+      <button id="rollbtn">Measure gayness</button>
+      <br>
+    </form> 
+    <h1 id="tex">Awaiting results...</h1>
+    <h1 id="desc"></h1>
+  </div>
+    <script>
+      const button = document.getElementById('rollbtn');
+      const input = document.getElementById('usernameInput');
+      button.addEventListener("click", function(event) {
+        event.preventDefault();
+        const usname = input.value;
+        fetch("http://localhost:3000/gaypercent", {
+          method:"POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body:JSON.stringify({
+            username: usname
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('tex').innerText = usname + " is " + data.percent + "% gay!";
+          document.getElementById('desc').innerText = data.description;
+        });
+      });
+    </script>
+    <script>
+      const tabbtn = document.getElementById('tabbtn');
+      const tabdiv = document.getElementById('tabdiv');
+      tabbtn.addEventListener("click", function() {
+        if (tabdiv.style.display === "none" || tabdiv.style.display === "") {
+          tabdiv.style.display = "block";
+        } else {
+          tabdiv.style.display = "none";
+        }
+      });
+    </script> 
+    <script>
+      const contbtn = document.getElementById('contbtn');
+      const contdiv = document.getElementById('contdiv');
+      const tabdivtitle = document.getElementById('tabdivtitle');
+      const backbtn = document.getElementById('contbackbtn');
+      const infobtn = document.getElementById('infobtn');
+      const infobackbtn = document.getElementById('infobackbtn');
+      const infodiv = document.getElementById('infodiv');
+      const settingsbtn = document.getElementById('settingsbtn');
+      const settingsbackbtn = document.getElementById('settingsbackbtn');
+      const settingsdiv = document.getElementById('settingsdiv');
+      const togbtn = document.getElementById('togbtn');
+      const divs = document.querySelectorAll("div");
+      const buttons = document.querySelectorAll(".tabdivbtn");
+      const skebobbtn = document.getElementById("skebobbtn");
+      skebobbtn.addEventListener("click", function() {
+        document.getElementById("skebobaudio").play();
+      });
+      var isDarkTheme = false;
+      togbtn.addEventListener("click", function() {     
+        console.log(isDarkTheme);
+        if (isDarkTheme === false) {
+          isDarkTheme = true;
+          localStorage.setItem("darkTheme", isDarkTheme);
+          document.body.style.backgroundColor = "black";
+          const divtxts = document.getElementsByClassName("divtxt");
+          for (let i = 0; i < divtxts.length; i++) {
+            divtxts[i].style.color = "white";
+          }
+          document.getElementById("tabdiv").style.border = "2px solid rgb(67, 67, 67)";
+          document.getElementById("gtitle").style.backgroundColor = "rgb(67, 67, 67)";
+          document.getElementById("tabbtn").style.filter = "invert(1)";
+          togbtn.textContent = "Toggle light theme";
+          togbtn.style.filter = "invert(1)";
+          divs.forEach(div => {
+            div.style.backgroundColor = "black";
+            console.log(div.style.backgroundColor);
+          });
+        } else {
+          isDarkTheme = false;
+          localStorage.setItem("darkTheme", isDarkTheme);
+          document.body.style.backgroundColor = "white";
+          const divtxts = document.getElementsByClassName("divtxt");
+          for (let i = 0; i < divtxts.length; i++) {
+            divtxts[i].style.color = "black";
+          }
+          document.getElementById("tabdiv").style.border = "2px solid black";
+          document.getElementById("gtitle").style.backgroundColor = "black";
+          document.getElementById("tabbtn").style.filter = "invert(0)";
+          togbtn.textContent = "Toggle dark theme";
+          togbtn.style.filter = "invert(0)";
+          divs.forEach(div => {
+            div.style.backgroundColor = "white";
+          });
+        }
+      });
+      backbtn.addEventListener("click", function() {
+        if (contdiv.style.display === "block") {
+          contdiv.style.display = "none";
+          tabdivtitle.style.display = "block";
+        }
+      });
+      contbtn.addEventListener("click", function() {
+        if (contdiv.style.display === "none" || contdiv.style.display === "") {
+          contdiv.style.display = "block";
+          tabdivtitle.style.display = "none";
+        }
+      });
+      infobtn.addEventListener("click", function() {
+        if (infodiv.style.display === "none" || infodiv.style.display === "") {
+          infodiv.style.display = "block";
+          tabdivtitle.style.display = "none";
+        }
+      });
+      infobackbtn.addEventListener("click", function() {
+        if (infodiv.style.display === "block") {
+          infodiv.style.display = "none";
+          tabdivtitle.style.display = "block";
+        }
+      });
+      settingsbtn.addEventListener("click", function() {
+        if (settingsdiv.style.display === "none" || settingsdiv.style.display === "") {
+          settingsdiv.style.display = "block";
+          tabdivtitle.style.display = "none";
+        }
+      });
+      settingsbackbtn.addEventListener("click", function() {
+        if (settingsdiv.style.display === "block") {
+          settingsdiv.style.display = "none";
+          tabdivtitle.style.display = "block";
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function() {
+        const darkThemeSetting = localStorage.getItem("darkTheme");
+        if (darkThemeSetting === "true") {
+          togbtn.click();
+        }
+      });
+    </script>
+
+</body>
+</html>
