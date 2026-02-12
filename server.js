@@ -95,7 +95,7 @@ async function measureGayness(username) {
     if (simwords.length > 1) {
       for (let j = 0; j < simwords.length; j++) {
         var dist = clmatch.distance(sname[i], simwords[j]);
-        if (dist < sname[i].length * 1.6) {
+        if (dist < sname[i].length * 1.2) {
           var simperc = (1 - (dist / simwords[j].length * 0.5));
           gaypercent += ((gayArray.find(item => item.name === simwords[j]).value)/simwords.length)*simperc;
         };
@@ -104,19 +104,12 @@ async function measureGayness(username) {
     else {
       var dist = clmatch.distance(sname[i], simwords[0]);
       var simperc = (1 - (dist / simwords[0].length * 0.5));
-      if (dist < sname[i].length * 1.6) {
+      if (dist < sname[i].length * 1.2) {
         var val = gayArray.find(item => item.name === simwords[0]).value;
         gaypercent += val * simperc;
       };
     };
   };  
-
-  for (let i = 0; i < descriptionArray.length; i++) {
-    if (gaypercent >= descriptionArray[i].min && gaypercent <= descriptionArray[i].max) {
-      console.log("Description: " + descriptionArray[i].description);
-      description = descriptionArray[i].description;
-    }
-  };
 
   var multiplier = 1;
   if (charperc > 2) {
@@ -126,6 +119,12 @@ async function measureGayness(username) {
     gaypercent = 0;
   }
   gaypercent = gaypercent * multiplier;
+  for (let i = 0; i < descriptionArray.length; i++) {
+    if (gaypercent >= descriptionArray[i].min && gaypercent <= descriptionArray[i].max) {
+      console.log("Description: " + descriptionArray[i].description);
+      description = descriptionArray[i].description;
+    }
+  };
   return [gaypercent.toFixed(2), description];
 };
 
