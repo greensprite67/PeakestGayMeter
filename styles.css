@@ -20,8 +20,8 @@
 
 #tabdiv {
     position: absolute;
-    width: 14vw;
-    height: 35vw;
+    width: 12rem;
+    height: 30rem;
     background-color: rgb(255, 255, 255);
     border: 2px solid black;
     display: none;
@@ -37,21 +37,21 @@
 }
 
 .tabdivbtn {
-    width: 12vw;
-    height: 3vw;
-    margin: 1vw;
+    width: 10rem;
+    height: 2rem;
+    margin: 1rem;
     font-weight: bold;
-    font-size: 1.2vw;
+    font-size: 1.4rem;
     background-color: hsl(218, 100%, 50%);
     color: hsl(0, 0%, 100%);
 }
 
 #togbtn {
-    width: 12vw;
-    height: 3vw;
-    margin: 1vw;
+    width: 10rem;
+    height: 2rem;
+    margin: 1rem;
     font-weight: bold;
-    font-size: 1.2vw;
+    font-size: 1.4rem;
     font-weight: bold;
     background-color: black;
     color: darkgray;
@@ -65,22 +65,22 @@
     margin-top: 1rem;
     font-size: 1.2rem;
     font-weight: bold;
-    width: 14vw;
-    height: 4vw;
+    width: 12rem;
+    height: 3rem;
 }
 
 #usernameInput {
-    width: 18vw;
-    height: 2.5vw;    
+    width: 16rem;
+    height: 2rem;    
     font-weight: bold;
-    font-size: 1.4vw;
+    font-size: 1.2rem;
     border: 2px solid black;
 }
 
 #gaydiv {
-    margin-top: 2vw;
-    margin-left: 16vw;
-    margin-right: 4vw;
+    margin-top: 1.5rem;
+    margin-left: 14rem;
+    margin-right: 4rem;
     width: fit-content;
     background-color: rgb(255, 255, 255);
 }
@@ -94,9 +94,9 @@
 }
 
 #skebobbtn {
-    width: 12vw;
-    height: 3vw;
-    margin: 1vw;
+    width: 10rem;
+    height: 2rem;
+    margin: 1rem;
     font-weight: bold;
     background-image: url(skebob.jpg);
     background-size: contain;
